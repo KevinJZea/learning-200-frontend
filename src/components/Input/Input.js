@@ -7,6 +7,7 @@ export class Input extends Component {
     data: {
       username: "",
     },
+    loadingNewPage: false,
   };
 
   handleChange = (e) => {
@@ -19,6 +20,9 @@ export class Input extends Component {
   };
 
   sendUser = async () => {
+    this.setState({
+      loadingNewPage: true,
+    });
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
@@ -35,33 +39,43 @@ export class Input extends Component {
 
     fetch("https://learning-200.herokuapp.com/main", requestOptions)
       .then((response) => response.json())
-      .then((result) => console.log(result))
+
+      .then((result) => {
+        this.setState({
+          loadingNewPage: false,
+        });
+        this.props.history.push("/lp");
+      })
       .catch((error) => console.log("error", error));
   };
 
   render() {
     return (
       <React.Fragment>
-        <div className="Input-Main-Container">
-          <div className="Input__Container">
-            <h3>Ingresa tu username de Platzi</h3>
+        {this.state.loadingNewPage ? (
+          <h1>Loading</h1>
+        ) : (
+          <div className="Input-Main-Container">
+            <div className="Input__Container">
+              <h3>Ingresa tu username de Platzi</h3>
 
-            <span>https://platzi.com/p/{this.state.data.username}</span>
-            <input
-              placeholder="Ingresa tu username de Platzi"
-              type="text"
-              name="username"
-              id="username"
-              onChange={this.handleChange}
-            />
+              <span>platzi.com/@{this.state.data.username}</span>
+              <input
+                placeholder="Ingresa tu username de Platzi"
+                type="text"
+                name="username"
+                id="username"
+                onChange={this.handleChange}
+              />
 
-            <Link to="/exam">
-              <button type="button" onClick={this.sendUser}>
-                Comenzar
-              </button>
-            </Link>
+              <Link to="/exam">
+                <button type="button" onClick={this.sendUser}>
+                  Comenzar
+                </button>
+              </Link>
+            </div>
           </div>
-        </div>
+        )}
       </React.Fragment>
     );
   }
