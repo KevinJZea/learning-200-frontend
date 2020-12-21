@@ -1,6 +1,6 @@
 # Learningator -- Hackathon Platzi Master 2020
 
-## Sobre el Proyecto :bulb:
+## Sobre el [Proyecto](https://learningator.web.app/) :bulb:
 
 Learningator es la herramienta que revolucionará la manera en la que los estudiantes aprenden durante su paso en Platzi Master. Con esta herramienta, los procesos de generación de Learning Paths (LP) serán 80% más rápidos y los coaches podrán brindar mayor acompañamiento a sus estudiantes.
 
